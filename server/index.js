@@ -10,19 +10,19 @@ import cookieParser from "cookie-parser";
 const app = express();
 dotenv.config();
 
-// const connect = async () => {
-// 	try {
-// 		console.log(process.env.MONGO);
-// 		await mongoose.connect(process.env.MONGO, {
-// 			dbName: "youtube",
-// 		});
-// 		console.log("Connected to mongoDB");
-// 	} catch (error) {
-// 		console.log(error);
-// 	}
-// };
+const connect = async () => {
+	try {
+		console.log(process.env.MONGO);
+		await mongoose.connect(process.env.MONGO, {
+			dbName: "youtube",
+		});
+		console.log("Connected to mongoDB");
+	} catch (error) {
+		console.log(error);
+	}
+};
 
-// connect();
+connect();
 
 //middlewares
 app.use(cookieParser());
@@ -46,6 +46,6 @@ app.use((err, req, res, next) => {
 	});
 });
 
-app.listen(8800, () => {
+app.listen(process.env.PORT || 3000, () => {
 	console.log("Connected to Server");
 });

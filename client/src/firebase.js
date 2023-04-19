@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-	apiKey: "AIzaSyCjnuu1JVa6u1-N1vX9plplAIvG5C6_mH4",
-	authDomain: "fullstack-fdb75.firebaseapp.com",
-	projectId: "fullstack-fdb75",
-	storageBucket: "fullstack-fdb75.appspot.com",
-	messagingSenderId: "91421338380",
-	appId: "1:91421338380:web:1807605a5fe7858cf6f729",
+	apiKey: "AIzaSyDj8p88ADAjfDwQctwvbcYF0MpY7Xtc3d8",
+	authDomain: "fullstack-384218.firebaseapp.com",
+	projectId: "youtube-fullstack-384218",
+	storageBucket: "youtube-fullstack-384218.appspot.com",
+	messagingSenderId: "630429392288",
+	appId: "1:630429392288:web:e3d76d869de51b4f00d8c5",
 };
 
 const app = initializeApp(firebaseConfig);
