@@ -152,7 +152,7 @@ const Upload = ({ setOpen }) => {
 
 	const handleUpload = async (e) => {
 		e.preventDefault();
-		const res = await axios.post(`${process.env.API}/videos`, {
+		const res = await axios.post(`${process.env.REACT_APP_API}/videos`, {
 			...inputs,
 			tags,
 		});
