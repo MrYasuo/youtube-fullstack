@@ -14,7 +14,8 @@ const Home = ({ type }) => {
 	useEffect(() => {
 		const fetchVideos = async () => {
 			const res = await axios.get(
-				`${process.env.REACT_APP_API}/videos/${type}`
+				`${process.env.REACT_APP_API}/videos/${type}`,
+				{ withCredentials: true }
 			);
 			setVideos(res.data);
 		};

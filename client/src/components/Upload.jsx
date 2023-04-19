@@ -137,7 +137,8 @@ const Upload = ({ setOpen }) => {
 			formData.append("upload_preset", "ml_default");
 			const res = await axios.post(
 				"https://api.cloudinary.com/v1_1/dmbz4r0vl/image/upload",
-				formData
+				formData,
+				{ withCredentials: true }
 			);
 			const { url } = res.data;
 			setInputs((prev) => {
@@ -152,10 +153,14 @@ const Upload = ({ setOpen }) => {
 
 	const handleUpload = async (e) => {
 		e.preventDefault();
-		const res = await axios.post(`${process.env.REACT_APP_API}/videos`, {
-			...inputs,
-			tags,
-		});
+		const res = await axios.post(
+			`${process.env.REACT_APP_API}/videos`,
+			{
+				...inputs,
+				tags,
+			},
+			{ withCredentials: true }
+		);
 		setOpen(false);
 		res.status === 200 && navigate(`/video/${res.data._id}`);
 	};

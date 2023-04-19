@@ -42,7 +42,8 @@ const Comment = ({ comment }) => {
 	useEffect(() => {
 		const fetchComment = async () => {
 			const res = await axios.get(
-				`${process.env.REACT_APP_API}/users/find/${comment.userId}`
+				`${process.env.REACT_APP_API}/users/find/${comment.userId}`,
+				{ withCredentials: true }
 			);
 			setChannel(res.data);
 		};

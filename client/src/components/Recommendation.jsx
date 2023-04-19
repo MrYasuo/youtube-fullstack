@@ -13,7 +13,8 @@ const Recommendation = ({ tags }) => {
 	useEffect(() => {
 		const fetchVideos = async () => {
 			const res = await axios.get(
-				`${process.env.REACT_APP_API}/videos/tags?tags=${tags}`
+				`${process.env.REACT_APP_API}/videos/tags?tags=${tags}`,
+				{ withCredentials: true }
 			);
 			setVideos(res.data);
 		};
