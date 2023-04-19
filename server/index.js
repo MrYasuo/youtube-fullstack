@@ -22,9 +22,14 @@ const connect = async () => {
 	}
 };
 
+connect();
+
 //middlewares
 app.use(cookieParser());
 app.use(express.json());
+app.get("/", (req, res) => {
+	res.send("Hello from server");
+});
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/videos", videoRoutes);
@@ -41,7 +46,6 @@ app.use((err, req, res, next) => {
 	});
 });
 
-app.listen(8800, async () => {
-	await connect();
+app.listen(process.env.port || 8800, () => {
 	console.log("Connected to Server");
 });
