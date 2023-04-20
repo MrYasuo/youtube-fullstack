@@ -4,6 +4,17 @@ import bcrypt from "bcryptjs";
 import { createError } from "../error.js";
 import jwt from "jsonwebtoken";
 
+export const logout = async (req, res, next) => {
+	try {
+		res
+			.clearCookie("access_token")
+			.status(200)
+			.json("User has been logged out!");
+	} catch (err) {
+		next(err);
+	}
+};
+
 export const signup = async (req, res, next) => {
 	try {
 		const salt = bcrypt.genSaltSync(10);
@@ -33,6 +44,7 @@ export const signin = async (req, res, next) => {
 			.cookie("access_token", token, {
 				httpOnly: true,
 				secure: process.env.NODE_ENV === "production",
+				sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
 			})
 			.status(200)
 			.json(others);
@@ -50,6 +62,7 @@ export const googleAuth = async (req, res, next) => {
 				.cookie("access_token", token, {
 					httpOnly: true,
 					secure: process.env.NODE_ENV === "production",
+					sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
 				})
 				.status(200)
 				.json(user._doc);
@@ -64,6 +77,7 @@ export const googleAuth = async (req, res, next) => {
 				.cookie("access_token", token, {
 					httpOnly: true,
 					secure: process.env.NODE_ENV === "production",
+					sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
 				})
 				.status(200)
 				.json(savedUser._doc);

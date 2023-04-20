@@ -30,6 +30,7 @@ const Input = styled.input`
 
 const Comments = ({ videoId }) => {
 	const { currentUser } = useSelector((state) => state.user);
+	const [comment, setComment] = useState("");
 
 	const [comments, setComments] = useState([]);
 
@@ -47,10 +48,28 @@ const Comments = ({ videoId }) => {
 
 	return (
 		<Container>
-			<NewComment>
-				<Avatar src={currentUser.img} />
-				<Input placeholder="Add a comment..." />
-			</NewComment>
+			{currentUser && (
+				<NewComment>
+					<Avatar src={currentUser.img} referrerPolicy="no-referrer" />
+					<Input
+						placeholder="Add a comment..."
+						value={comment}
+						onChange={(e) => setComment(e.target.value)}
+						onKeyDown={async (e) => {
+							if (e.key === "Enter") {
+								const res = await axios.post("/comments", {
+									videoId,
+									userId: currentUser._id,
+									desc: comment,
+								});
+								const newComment = res.data;
+								setComment("");
+								setComments([...comments, newComment]);
+							}
+						}}
+					/>
+				</NewComment>
+			)}
 			{comments.map((comment) => (
 				<Comment key={comment._id} comment={comment} />
 			))}

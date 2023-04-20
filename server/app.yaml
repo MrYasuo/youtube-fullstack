@@ -3,3 +3,4 @@ runtime: nodejs16
 env_variables:
   MONGO: "mongodb+srv://yasuo:buihaidz2k3@new.hborl.mongodb.net/?retryWrites=true&w=majority"
   JWT: "secret"
+  NODE_ENV: "production"

@@ -1,6 +1,7 @@
 import axios from "../configs/axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { DateTime } from "luxon";
 
 const Container = styled.div`
 	display: flex;
@@ -48,15 +49,18 @@ const Comment = ({ comment }) => {
 	}, [comment.userId]);
 
 	return (
-		<Container>
-			<Avatar src={channel.img} />
-			<Details>
-				<Name>
-					{channel.name} <Date>1 day ago</Date>
-				</Name>
-				<Text>{comment.desc}</Text>
-			</Details>
-		</Container>
+		channel && (
+			<Container>
+				<Avatar src={channel.img} referrerPolicy="no-referrer" />
+				<Details>
+					<Name>
+						{channel.name}
+						<Date>{DateTime.fromISO(comment.createdAt).toRelative()}</Date>
+					</Name>
+					<Text>{comment.desc}</Text>
+				</Details>
+			</Container>
+		)
 	);
 };
 
