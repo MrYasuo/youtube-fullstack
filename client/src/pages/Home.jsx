@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Card from "../components/Card";
-import axios from "axios";
+import axios from "../configs/axios";
 const Container = styled.div`
 	display: flex;
 	justify-content: space-between;
@@ -13,10 +13,7 @@ const Home = ({ type }) => {
 
 	useEffect(() => {
 		const fetchVideos = async () => {
-			const res = await axios.get(
-				`${process.env.REACT_APP_API}/videos/${type}`,
-				{ withCredentials: true }
-			);
+			const res = await axios.get(`/videos/${type}`);
 			setVideos(res.data);
 		};
 		fetchVideos();

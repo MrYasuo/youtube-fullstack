@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../configs/axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
@@ -36,10 +36,7 @@ const Comments = ({ videoId }) => {
 	useEffect(() => {
 		const fetchComments = async () => {
 			try {
-				const res = await axios.get(
-					`${process.env.REACT_APP_API}/comments/${videoId}`,
-					{ withCredentials: true }
-				);
+				const res = await axios.get(`/comments/${videoId}`);
 				setComments(res.data);
 			} catch (err) {}
 		};

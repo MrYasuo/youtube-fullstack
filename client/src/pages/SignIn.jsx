@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../configs/axios";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
@@ -81,7 +81,7 @@ const SignIn = () => {
 		dispatch(loginStart());
 		try {
 			const res = await axios.post(
-				`${process.env.REACT_APP_API}/auth/signin`,
+				`/auth/signin`,
 				{
 					name,
 					password,
@@ -100,7 +100,7 @@ const SignIn = () => {
 		signInWithPopup(auth, provider)
 			.then((result) => {
 				axios
-					.post(`${process.env.REACT_APP_API}/auth/google`, {
+					.post(`/auth/google`, {
 						name: result.user.displayName,
 						email: result.user.email,
 						img: result.user.photoURL,

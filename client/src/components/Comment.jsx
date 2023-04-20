@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../configs/axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
@@ -41,10 +41,7 @@ const Comment = ({ comment }) => {
 
 	useEffect(() => {
 		const fetchComment = async () => {
-			const res = await axios.get(
-				`${process.env.REACT_APP_API}/users/find/${comment.userId}`,
-				{ withCredentials: true }
-			);
+			const res = await axios.get(`/users/find/${comment.userId}`);
 			setChannel(res.data);
 		};
 		fetchComment();

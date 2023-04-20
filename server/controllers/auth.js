@@ -32,7 +32,7 @@ export const signin = async (req, res, next) => {
 		res
 			.cookie("access_token", token, {
 				httpOnly: true,
-				secure: true,
+				secure: process.env.NODE_ENV === "production",
 			})
 			.status(200)
 			.json(others);
@@ -49,7 +49,7 @@ export const googleAuth = async (req, res, next) => {
 			res
 				.cookie("access_token", token, {
 					httpOnly: true,
-					secure: true,
+					secure: process.env.NODE_ENV === "production",
 				})
 				.status(200)
 				.json(user._doc);
@@ -63,7 +63,7 @@ export const googleAuth = async (req, res, next) => {
 			res
 				.cookie("access_token", token, {
 					httpOnly: true,
-					secure: true,
+					secure: process.env.NODE_ENV === "production",
 				})
 				.status(200)
 				.json(savedUser._doc);

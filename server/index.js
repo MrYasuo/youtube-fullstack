@@ -23,10 +23,16 @@ const connect = async () => {
 	}
 };
 
-connect();
-
 //middlewares
-app.use(cors());
+app.use(
+	cors({
+		origin: [
+			"https://main.d2bnbncsey46ic.amplifyapp.com",
+			"http://localhost:3000",
+		],
+		credentials: true,
+	})
+);
 app.use(cookieParser());
 app.use(express.json());
 app.get("/", (req, res) => {
@@ -48,6 +54,7 @@ app.use((err, req, res, next) => {
 	});
 });
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 5000, async () => {
+	await connect();
 	console.log("Connected to Server");
 });

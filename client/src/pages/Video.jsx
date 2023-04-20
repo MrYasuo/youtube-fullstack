@@ -10,7 +10,7 @@ import Comments from "../components/Comments";
 import Card from "../components/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import axios from "axios";
+import axios from "../configs/axios";
 import { dislike, fetchSuccess, like } from "../redux/videoSlice";
 import { format } from "timeago.js";
 import { subscription } from "../redux/userSlice";
@@ -128,13 +128,9 @@ const Video = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const videoRes = await axios.get(
-					`${process.env.REACT_APP_API}/videos/find/${path}`,
-					{ withCredentials: true }
-				);
+				const videoRes = await axios.get(`/videos/find/${path}`);
 				const channelRes = await axios.get(
-					`${process.env.REACT_APP_API}/users/find/${videoRes.data.userId}`,
-					{ withCredentials: true }
+					`/users/find/${videoRes.data.userId}`
 				);
 				setChannel(channelRes.data);
 				dispatch(fetchSuccess(videoRes.data));
@@ -144,30 +140,18 @@ const Video = () => {
 	}, [path, dispatch]);
 
 	const handleLike = async () => {
-		await axios.put(
-			`${process.env.REACT_APP_API}/users/like/${currentVideo._id}`,
-			{ withCredentials: true }
-		);
+		await axios.put(`/users/like/${currentVideo._id}`);
 		dispatch(like(currentUser._id));
 	};
 	const handleDislike = async () => {
-		await axios.put(
-			`${process.env.REACT_APP_API}/users/dislike/${currentVideo._id}`,
-			{ withCredentials: true }
-		);
+		await axios.put(`/users/dislike/${currentVideo._id}`);
 		dispatch(dislike(currentUser._id));
 	};
 
 	const handleSub = async () => {
 		currentUser.subscribedUsers.includes(channel._id)
-			? await axios.put(
-					`${process.env.REACT_APP_API}/users/unsub/${channel._id}`,
-					{ withCredentials: true }
-			  )
-			: await axios.put(
-					`${process.env.REACT_APP_API}/users/sub/${channel._id}`,
-					{ withCredentials: true }
-			  );
+			? await axios.put(`/users/unsub/${channel._id}`)
+			: await axios.put(`/users/sub/${channel._id}`);
 		dispatch(subscription(channel._id));
 	};
 

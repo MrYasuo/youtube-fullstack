@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../configs/axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Card from "./Card";
@@ -12,10 +12,7 @@ const Recommendation = ({ tags }) => {
 
 	useEffect(() => {
 		const fetchVideos = async () => {
-			const res = await axios.get(
-				`${process.env.REACT_APP_API}/videos/tags?tags=${tags}`,
-				{ withCredentials: true }
-			);
+			const res = await axios.get(`/videos/tags?tags=${tags}`);
 			setVideos(res.data);
 		};
 		fetchVideos();

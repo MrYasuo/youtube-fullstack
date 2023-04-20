@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../configs/axios";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
@@ -16,10 +16,7 @@ const Search = () => {
 
 	useEffect(() => {
 		const fetchVideos = async () => {
-			const res = await axios.get(
-				`${process.env.REACT_APP_API}/videos/search${query}`,
-				{ withCredentials: true }
-			);
+			const res = await axios.get(`/videos/search${query}`);
 			setVideos(res.data);
 		};
 		fetchVideos();

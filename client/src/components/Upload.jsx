@@ -7,7 +7,7 @@ import {
 	getDownloadURL,
 } from "firebase/storage";
 import app from "../firebase";
-import axios from "axios";
+import axios from "../configs/axios";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
@@ -137,8 +137,7 @@ const Upload = ({ setOpen }) => {
 			formData.append("upload_preset", "ml_default");
 			const res = await axios.post(
 				"https://api.cloudinary.com/v1_1/dmbz4r0vl/image/upload",
-				formData,
-				{ withCredentials: true }
+				formData
 			);
 			const { url } = res.data;
 			setInputs((prev) => {
@@ -153,14 +152,10 @@ const Upload = ({ setOpen }) => {
 
 	const handleUpload = async (e) => {
 		e.preventDefault();
-		const res = await axios.post(
-			`${process.env.REACT_APP_API}/videos`,
-			{
-				...inputs,
-				tags,
-			},
-			{ withCredentials: true }
-		);
+		const res = await axios.post(`/videos`, {
+			...inputs,
+			tags,
+		});
 		setOpen(false);
 		res.status === 200 && navigate(`/video/${res.data._id}`);
 	};
