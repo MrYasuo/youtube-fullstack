@@ -138,7 +138,7 @@ const Menu = ({ darkMode, setDarkMode }) => {
 						<Hr />
 					</>
 				)}
-				<Title>BEST OF LAMATUBE</Title>
+				<Title>BEST OF CUSYOUTUBE</Title>
 				<Item>
 					<LibraryMusicOutlinedIcon />
 					Music
